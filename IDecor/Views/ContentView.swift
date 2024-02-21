@@ -9,10 +9,10 @@ import SwiftUI
 import RealityKit
 
 struct ContentView: View {
-    @State private var objects: [ARModel] = [ARModel(id: "chair", sysName: "chair", scale: 0.4),
-                                             ARModel(id: "flower", sysName: "camera.macro", scale: 0.4),
-                                             ARModel(id: "tv", sysName: "tv", scale: 0.4),
-                                             ARModel(id: "gramophone", sysName: "music.quarternote.3", scale: 0.4)]
+    @State private var objects: [ARModel] = [ARModel(id: "chair", sysName: "chair", scale: 0.6),
+                                             ARModel(id: "flower", sysName: "camera.macro", scale: 0.5),
+                                             ARModel(id: "tv", sysName: "tv", scale: 0.5),
+                                             ARModel(id: "gramophone", sysName: "music.quarternote.3", scale: 0.6)]
     
     var body: some View {
         CustomARViewRepresentable()
