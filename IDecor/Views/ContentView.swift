@@ -1,16 +1,9 @@
-//
-//  ContentView.swift
-//  IDecor
-//
-//  Created by admin on 18.02.24.
-//
-
 import SwiftUI
-import RealityKit
 
 struct ContentView: View {
+    @State private var alertVisible: Bool = true
+    
     @State private var objects: [ARModel] = [ARModel(id: "chair", sysName: "chair", scale: 0.6),
-                                             ARModel(id: "flower", sysName: "camera.macro", scale: 0.5),
                                              ARModel(id: "tv", sysName: "tv", scale: 0.5),
                                              ARModel(id: "gramophone", sysName: "music.quarternote.3", scale: 0.6)]
     
@@ -46,6 +39,11 @@ struct ContentView: View {
                     }
                     .padding()
                 }
+            }
+            .alert(isPresented: $alertVisible) {
+                Alert(title: Text("Wichtiger Hinweis"),
+                      message: Text("Vor dem Platzieren von Objekten die Oberfläche langsam mit der Kamera einscannen"),
+                      dismissButton: .default(Text("Ok")))
             }
     }
 }

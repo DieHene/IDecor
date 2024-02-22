@@ -1,16 +1,8 @@
-//
-//  CustomARView.swift
-//  IDecor
-//
-//  Created by admin on 18.02.24.
-//
-
 import ARKit
 import Combine
 import RealityKit
-import SwiftUI
 
-class CustomARView: ARView {
+class CustomARView: ARView, ARSCNViewDelegate {
     required init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
     }
@@ -26,14 +18,14 @@ class CustomARView: ARView {
         
         let config = ARWorldTrackingConfiguration()
         config.planeDetection = [.horizontal]
-        config.isLightEstimationEnabled = false
+        config.isLightEstimationEnabled = true
+        config.environmentTexturing = .automatic
         
         self.session.run(config)
         
         self.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panRecognizer)))
         
-        subscribeToActionStream()
-    }
+        subscribeToActionStream()    }
     
     private var cancellables: Set<AnyCancellable> = []
     
@@ -42,10 +34,10 @@ class CustomARView: ARView {
             .actionStream
             .sink { [weak self] action in
                 switch action {
-                    case .placeObject(let object, let scale):
+                case .placeObject(let object, let scale):
                     self?.placeObject(object: object, scale: scale)
                     
-                    case .removeAllAnchors:
+                case .removeAllAnchors:
                     self?.scene.anchors.removeAll()
                 }
             }
@@ -62,7 +54,7 @@ class CustomARView: ARView {
         
         self.installGestures([.rotation],for: model as Entity & HasCollision)
         
-        scene.anchors.append(anchor)
+        self.scene.anchors.append(anchor)
     }
     
     @objc func panRecognizer(_ sender: UITapGestureRecognizer){

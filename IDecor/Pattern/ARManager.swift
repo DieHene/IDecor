@@ -1,10 +1,3 @@
-//
-//  ARManager.swift
-//  IDecor
-//
-//  Created by admin on 18.02.24.
-//
-
 import Combine
 
 class ARManager {
